@@ -1,7 +1,7 @@
-close all
+% close all
 clear all
 
-Ns = 100;
+Ns = 1000;
 figure
 for k=1:Ns
     Xp0 = rand;
@@ -18,9 +18,13 @@ ylabel('Velocity')
 
 x=linspace(1,Ns-1,Ns-1);
 [coeff,score,latent] = pca(Xpk);
+
 figure
-scatter(x,latent,40,'filled')
-xlim([0 5])
+bar(latent/sum(latent))
+xlim([0.5 5])
+xlabel(['sum of the 3 first eigenvalues = ',num2str((latent(1)+latent(2)+latent(3))/sum(latent))])
+title(['Principal Analysis Components for Ns =',num2str(Ns)])
+
 % figure
 % plot(Xp,Up)
 % hold on
