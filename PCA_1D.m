@@ -1,11 +1,11 @@
-% close all
+close all
 clear all
 
-Ns = 1000;
+Ns = 100;
 figure
 for k=1:Ns
-    Xp0 = rand;
-    Up0 = 0;
+    Xp0 = rand*7;
+    Up0 = rand;
     [Xp,Up,Ug]=TG1D(Xp0,Up0,10);
     Xpk(k,:) = Xp(:);
     Upk(k,:) = Up(:);
