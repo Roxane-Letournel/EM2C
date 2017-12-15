@@ -69,7 +69,7 @@ for i=1:Npas-1
             km1 = (k-1>0)*(k-1)+(k-1==0)*Nx;
 
            %advection
-              C(k) = C_old(k) - deltat*(f(C(kp1)) - f(C(k))) /dx;
+              C(k) = C_old(k) - deltat*(f(C_old(kp1)) - f(C_old(k))) /dx;
 
            %diffusion
               C(k) = C(k) + deltat*D*(C_old(kp1) + C_old(km1) - 2*C_old(k)) /dx^2;
@@ -108,3 +108,6 @@ ylabel('Velocity')
 
 figure
 autocorr(C)
+
+M = cov(X);
+plot(eig(M))
