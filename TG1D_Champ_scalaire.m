@@ -1,5 +1,5 @@
-% clear all
-% close all
+clear all
+close all
 
 %PARAMETRES
 taup=10;
@@ -68,7 +68,6 @@ for i=1:Npas-1
 
            %advection
               C(k,i+1) = C(k,i) - deltat*(f(C(kp1,i)) - f(C(k,i))) /dx;
-
            %diffusion
               C(k,i+1) = C(k,i+1) + deltat*D*(C(kp1,i) + C(km1,i) - 2*C(k,i)) /dx^2;
             %source
@@ -105,26 +104,3 @@ ylabel('Velocity')
 
 % Générer plusieurs simulations de Csim(k,x,t)
 % KC(s,t) = mean(Csim(:,x,s).*Csim(:,x,t)
-
-% figure
-% M = cov(C);
-% pcolor(M)
-% 
-% figure
-% bar(eig(M))
-
-K = zeros(40); %Sur temporel
-for s = 1:40
-    for t = 1:40
-        K(s,t) = mean(Csim(:,5,s).*Csim(:,5,t));
-    end
-end
-
-K = zeros(100); %sur spatial
-for s = 1:100
-    for t = 1:100
-        K(s,t) = mean(Csim(:,s,Npas).*Csim(:,t,Npas));
-    end
-end
-figure
-bar(eig(K))
