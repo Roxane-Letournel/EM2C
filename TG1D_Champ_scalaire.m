@@ -35,11 +35,10 @@ X(:,1)=random('uniform',0,1,N,1);
 U(:,1)=random('uniform',0,0,N,1);
 
 %initialisation champ scalaire
-C = zeros(Nx,1);
-C_old = zeros(Nx,1); 
+C = zeros(Nx,Npas);
 
 figure
-plot(linspace(0,1,resolution),C)
+plot(linspace(0,1,resolution),C(:,1))
 axis([0 1 0 0.03])
 ax = gca;
 ax.NextPlot = 'replaceChildren';
@@ -61,7 +60,6 @@ for i=1:Npas-1
     density= A.Values / N;
     
     % champ scalaire
-    C_old(:)=C(:);
             
         for k=1:Nx           
             
@@ -69,16 +67,16 @@ for i=1:Npas-1
             km1 = (k-1>0)*(k-1)+(k-1==0)*Nx;
 
            %advection
-              C(k) = C_old(k) - deltat*(f(C_old(kp1)) - f(C_old(k))) /dx;
+              C(k,i+1) = C(k,i) - deltat*(f(C(kp1,i)) - f(C(k,i))) /dx;
 
            %diffusion
-              C(k) = C(k) + deltat*D*(C_old(kp1) + C_old(km1) - 2*C_old(k)) /dx^2;
+              C(k,i+1) = C(k,i+1) + deltat*D*(C(kp1,i) + C(km1,i) - 2*C(k,i)) /dx^2;
             %source
-              C(k) = C(k) + deltat*alpha*density(k).^beta;  
+              C(k,i+1) = C(k,i+1) + deltat*alpha*density(k).^beta;  
             
         end
 %         plot(linspace(0,1,resolution),C,'LineWidth',2)
-        autocorr(C)
+        autocorr(C(:,i+1))
         title(['Scalar Field for N = ',num2str(N),' particles and t =',num2str(i*deltat),' s'])
         drawnow
         F(i) = getframe(gcf);
@@ -92,7 +90,7 @@ Ug(:,Npas)=sin(2*pi*X(:,Npas));
 figure
 
 subplot(1,2,1)
-plot(linspace(0,1,resolution),C)
+plot(linspace(0,1,resolution),C(:,Npas))
 xlabel('Position')
 title(['Scalar Field for N = ',num2str(N),' particles'])
 
