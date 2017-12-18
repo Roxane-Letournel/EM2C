@@ -10,11 +10,11 @@ xlabel(['Sum of 3 first eigenvalues =',num2str(sum(normalized_eigenvalues(1:3)))
 
 
 %% Evolution of eigenvalues for N fixed --> Peu important
-N = 100;
-Ns = [3,5,10,50];
-Eigenvalues = zeros(4,100,1);
+N = 1;
+Ns = [3,5,10,50,500];
+Eigenvalues = zeros(5,100,1);
 
-for k=1:4
+for k=1:5
     Eigenvalues(k,:,:) = KLE1D(Ns(k),N);
 end
 

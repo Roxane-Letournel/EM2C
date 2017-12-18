@@ -59,7 +59,7 @@ for i=1:Npas-1
             km1 = (k-1>0)*(k-1)+(k-1==0)*Nx;
 
            %advection
-              C(k,i+1) = C(k,i) - deltat*(f(C(kp1,i)) - f(C(k,i))) /dx;
+              C(k,i+1) = C(k,i) - deltat*(sin(2*pi*kp1/Nx)*C(kp1,i) - sin(2*pi*k/Nx)*C(k,i)) /dx;
 
            %diffusion
               C(k,i+1) = C(k,i+1) + deltat*D*(C(kp1,i) + C(km1,i) - 2*C(k,i)) /dx^2;
