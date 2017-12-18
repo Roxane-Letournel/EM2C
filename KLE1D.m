@@ -1,8 +1,7 @@
-clear all
-close all
+function [normalized_eigenvalues] = KLE1D(Ns,N)
 
-Ns = 50;
-N = 10;
+% Ns = 3;
+% N = 10000;
 
 C = TG1D_Scalar_Field(N);
 
@@ -18,6 +17,9 @@ for s = 1:100
         K(s,t) = mean(Csim(:,s,end).*Csim(:,t,end));
     end
 end
+normalized_eigenvalues = eig(K)/sum(eig(K));
+normalized_eigenvalues = flipud(normalized_eigenvalues)
 
-figure
-bar(eig(K))
+return 
+end
+
