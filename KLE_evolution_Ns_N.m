@@ -1,7 +1,8 @@
 %% Eigenvalues for Ns and N
 Ns = 30;
-N = 10;
-normalized_eigenvalues = KLE1D(Ns,N);
+N = 50;
+% normalized_eigenvalues = KLE1D(Ns,N); % POur Taylor Green
+normalized_eigenvalues = KLE_Burger1D(2*pi,1,N,0.2,Ns); % Pour Burger1D
 
 figure
 bar(normalized_eigenvalues(1:Ns+10))
