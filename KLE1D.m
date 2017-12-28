@@ -7,7 +7,7 @@ C = TG1D_Scalar_Field(N);
 
 Csim = zeros(Ns,size(C,1),size(C,2));
 
-for k = 1:Ns
+parfor k = 1:Ns
     Csim(k,:,:) = TG1D_Scalar_Field(N);
 end
     
