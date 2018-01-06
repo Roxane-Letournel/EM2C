@@ -1,8 +1,10 @@
 %% Eigenvalues for Ns and N
-Ns = 30;
-N = 50;
+Ns = 5;
+N = 10000;
+T_end = 15;
 % normalized_eigenvalues = KLE1D(Ns,N); % POur Taylor Green
-normalized_eigenvalues = KLE_Burger1D(2*pi,1,N,0.2,Ns); % Pour Burger1D
+% normalized_eigenvalues = KLE_Burger1D(2*pi,1,N,0.2,Ns); % Pour Burger1D
+[normalized_eigenvalues] = KLE_Turbulent2D(N,Ns,T_end); % Pour champ 2D turbulent
 
 figure
 bar(normalized_eigenvalues(1:Ns+10))

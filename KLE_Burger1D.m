@@ -6,8 +6,9 @@ function [normalized_eigenvalues] = KLE_Burger1D(omega1,couplage,N,Tend,Ns)
 C = Scalar_Field_Burger1D(omega1,couplage,N,Tend);
 
 Csim = zeros(Ns,size(C,1),size(C,2));
+Csim(1,:,:) = C(:,:);
 
-parfor k = 1:Ns
+parfor k = 2:Ns
     Csim(k,:,:) = Scalar_Field_Burger1D(omega1,couplage,N,Tend);
 end
     
