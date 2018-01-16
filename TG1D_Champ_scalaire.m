@@ -19,9 +19,9 @@ Fo=0.25;
 CFL=1.0;
 deltat=min([deltat,Fo*dx^2/D,CFL*dx/1 ]);
 
-Tend=1;
+Tend=0.1;
 Npas=Tend/deltat;
-N = 1000;
+N = 10;
 
 
 %Initialisation Particules Taylor Green    
@@ -90,14 +90,14 @@ figure
 subplot(1,2,1)
 plot(linspace(0,1,resolution),C(:,Npas))
 xlabel('Position')
-title(['Scalar Field for N = ',num2str(N),' particles'])
+title(['Scalar Field for N = ',num2str(N),' particles at t=',num2str((i+1)*deltat),'s'])
 
 subplot(1,2,2)
-for k=1:10:N
+for k=1:1:N
     scatter(X(k,:),U(k,:),1.5,'b','filled')
     hold on
 end
-scatter(X(1,:),Ug(1,:),1.5,'r','filled')
+% scatter(X(1,:),Ug(1,:),1.5,'r','filled')
 % legend('One particle','Gas')
 xlabel('Position')
 ylabel('Velocity')

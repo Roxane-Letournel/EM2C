@@ -33,7 +33,7 @@ Vg(1:Nx,1:Nx)=Vgfull(1:ratio:Nxin,1:ratio:Nxin);
  end
 
 
-T_end=150;
+T_end=15;
 
 Umax=max(max([abs(Ug); abs(Vg)]));
 
@@ -80,7 +80,7 @@ end
 mass(1)=sum(sum(Yold))/Nx^2;
 RMS(1)=std(std(Yold))/mean(mean(Yold));
 Ynew=Yold;
-
+Ystart = Yold;
 t(1)=0;
 
 figure; surfc(x,y,Ynew),shading interp,view(2),colormap('jet')
@@ -230,10 +230,17 @@ toc
 
 figure(1);subplot(1,2,1),plot(t,mass),hold on
 figure(1);subplot(1,2,2),plot(t,RMS),hold on
-figure;surfc(x,y,Ynew),shading interp,view(2),colormap('jet')
+figure;surfc(x,y,Ystart),shading interp,view(2),colormap('jet')
+xlabel('X')
+ylabel('Y')
+title(['Turbulent field with N = ', num2str(N),' particles at t = 0 s'])
 
-
-
-
+figure
+quiver(x,y,Ug,Vg)
+xlim([0 3])
+ylim([0 3])
+xlabel('X')
+ylabel('Y')
+title('Gas field')
 
 

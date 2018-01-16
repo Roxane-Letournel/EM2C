@@ -1,5 +1,5 @@
 clear all
-close all
+% close all
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PARAMETRES PHYSIQUES
@@ -44,9 +44,9 @@ Fo=0.25;
 CFL=1.0;
 deltat=min([deltat,Fo*dx^2/D,CFL*dx/1 ]);
 
-Tend=1;
+Tend=0.1;
 Npas=Tend/deltat;
-N = 1000;
+N = 10000;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INITIALISATION
@@ -138,9 +138,9 @@ for i=1:Npas-1
               C(k,i+1) = C(k,i+1) + deltat*alpha*density(k).^beta;  
             
         end
-        plot(linspace(0,1,resolution),C(:,i+1),'LineWidth',2)  % Trace le champ scalaire
-%         plot(linspace(0,1,resolution),Ug(:,i),'LineWidth',2) % Trace le champ de vitesse Burger
-        title(['Scalar Field for N = ',num2str(N),' particles and t =',num2str(i*deltat),' s'])
+%         plot(linspace(0,1,resolution),C(:,i+1),'LineWidth',2)  % Trace le champ scalaire
+        plot(linspace(0,1,resolution),Ug(:,i),'LineWidth',2) % Trace le champ de vitesse Burger
+        title(['Gas velocity for N = ',num2str(N),' particles and t =',num2str((i+1)*deltat),' s'])
         drawnow
         G(i) = getframe(gcf);
     

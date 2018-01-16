@@ -12,7 +12,22 @@ parfor k = 2:Ns
     [x,y,C] = Scalar_Field_turbulent2D(N,T_end);
     Csim(k,:,:) = C(:,:);
 end
-    
+
+champ_moyen = zeros(size(C,1),size(C,2));
+for i=1:size(C,1)
+    for j = 1:size(C,2)
+        champ_moyen(i,j) = mean(Csim(:,i,j));
+    end
+end
+
+for k = 1:Ns
+    for i=1:size(C,1)
+        for j = 1:size(C,2)
+            Csim(k,i,j) = Csim(k,i,j) - champ_moyen(i,j);
+        end
+    end
+end    
+
 K = zeros(size(C,1),size(C,2)); %sur spatial
 
 for s = 1:size(C,1)
