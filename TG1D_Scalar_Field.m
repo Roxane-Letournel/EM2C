@@ -17,7 +17,7 @@ Fo=0.25;
 CFL=1.0;
 deltat=min([deltat,Fo*dx^2/D,CFL*dx/1 ]);
 
-Tend=0.1;
+Tend=1.0;
 Npas=Tend/deltat;
 % N = 5;
 

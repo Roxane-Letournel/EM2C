@@ -31,11 +31,12 @@ end
 K = zeros(100); %sur spatial
 for s = 1:100
     for t = 1:100
-        K(s,t) = mean(Csim(:,s,end).*Csim(:,t,end));
+%         K(s,t) = mean(Csim(:,s,end).*Csim(:,t,end));
+        K(s,t) = mean((Csim(:,s,end)-mean(Csim(:,s,end))).*(Csim(:,t,end)-mean(Csim(:,t,end))));
     end
 end
 normalized_eigenvalues = eig(K)/sum(eig(K));
-somme = sum(eig(K))
+somme = sum(eig(K));
 normalized_eigenvalues = flipud(normalized_eigenvalues);
 
 return 

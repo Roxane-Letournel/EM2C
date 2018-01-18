@@ -1,6 +1,6 @@
 %clear
 
-N = 1000;
+N = 10000;
 lll=6; %6:8
     
     
@@ -33,7 +33,7 @@ Vg(1:Nx,1:Nx)=Vgfull(1:ratio:Nxin,1:ratio:Nxin);
  end
 
 
-T_end=15;
+T_end=30;
 
 Umax=max(max([abs(Ug); abs(Vg)]));
 
@@ -215,11 +215,11 @@ for k=1:Nt
     Yold=Ynew;
     mass(k+1)=sum(sum(Ynew))/Nx^2;
     RMS(k+1)=std(Ynew(:))/mean(mean(Ynew));
-    if RMS(k+1)<0.05
-        fprintf('mixing reached \n')
-        fprintf('time=%f s\n',t(k+1))
-        break
-    end
+%     if RMS(k+1)<0.05
+%         fprintf('mixing reached \n')
+%         fprintf('time=%f s\n',t(k+1))
+%         break
+%     end
 
     surfc(x,y,Ynew),shading interp,view(2),colormap('jet')  % Trace le champ scalaire
         title(['Scalar Field for N = ',num2str(N),' particles and t =',num2str(t(k+1)),' s'])

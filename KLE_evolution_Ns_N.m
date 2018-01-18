@@ -1,10 +1,10 @@
 %% Eigenvalues for Ns and N
-Ns = 10;
-N = 100;
-% T_end = 15;
+Ns = 50;
+N = 10000;
+T_end = 30;
 figure
 normalized_eigenvalues = KLE1D(Ns,N); % Pour Taylor Green 1D
-% normalized_eigenvalues = KLE_Burger1D(2*pi,1,N,0.2,Ns); % Pour Burger1D
+% normalized_eigenvalues = KLE_Burger1D(2*pi,1,N,1.0,Ns); % Pour Burger1D
 % [normalized_eigenvalues] = KLE_Turbulent2D(N,Ns,T_end); % Pour champ 2D turbulent
 
 figure
@@ -13,8 +13,8 @@ title(['Eigenvalues for Ns =',num2str(Ns),' and Np =',num2str(N)])
 xlabel(['Sum of 3 first eigenvalues =',num2str(sum(normalized_eigenvalues(1:3)))])
 % xlabel(['1st eigenvalue =',num2str(normalized_eigenvalues(1)),', 2nd eigenvalue =',num2str(normalized_eigenvalues(2)),', 3rd eigenvalue =',num2str(normalized_eigenvalues(3))])
 
-x = linspace(1,100,100)
-y = normalized_eigenvalues
+x = linspace(1,100,100);
+y = normalized_eigenvalues;
 
 % 
 figure(7)
@@ -46,14 +46,14 @@ title(['Evolution of eigenvalues for N =',num2str(N)])
 
 %% Evolution of eigenvalues for Ns fixed
 Ns = 10;
-N = [1,10,100,1000,10000];
+N = [1,10,100,1000,10000,100000];
 Eigenvalues = zeros(size(N,2),size(normalized_eigenvalues,1),1);
 
 for k=1:size(N,2)
-%     Eigenvalues(k,:) = KLE1D(Ns,N(k));
+    Eigenvalues(k,:) = KLE1D(Ns,N(k),Tend);
 %     Eigenvalues(k,:,:) = KLE_Burger1D(2*pi,1,N(k),0.2,Ns);
-    normalized_eigenvalues = KLE_Turbulent2D(N(k),Ns,T_end);
-    Eigenvalues(k,:,:) = normalized_eigenvalues(:,:);
+%     normalized_eigenvalues = KLE_Turbulent2D(N(k),Ns,T_end);
+%     Eigenvalues(k,:,:) = normalized_eigenvalues(:,:);
 end
 
 figure
